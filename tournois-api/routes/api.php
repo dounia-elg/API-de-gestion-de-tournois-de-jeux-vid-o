@@ -21,5 +21,8 @@ Route::group(['middleware' => 'api'], function () {
         Route::post('login', [AuthController::class, 'login']);
         Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:api');
         Route::get('user', [AuthController::class, 'user'])->middleware('auth:api');
+
+        // Tournament routes
+        Route::post('tournaments', [TournamentController::class, 'store']);
     });
 });
