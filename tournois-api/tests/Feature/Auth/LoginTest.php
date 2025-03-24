@@ -10,6 +10,25 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
+
+    protected function createAndAuthenticateUser(): array
+    {
+        $user = User::factory()->create([
+            'email' => 'test@example.com',
+            'password' => bcrypt('password123'),
+        ]);
+
+        $response = $this->postJson('/api/v1/login', [
+            'email' => 'test@example.com',
+            'password' => 'password123',
+        ]);
+
+        return [
+            'user' => $user,
+            'token' => $response['data']['authorization']['token']
+        ];
+    }
+
     /**
      * Test successful user login
      */
