@@ -75,4 +75,16 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
+
+
+    public function user(): JsonResponse
+    {
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'user' => auth()->user()
+            ]
+        ]);
+    }
 }
