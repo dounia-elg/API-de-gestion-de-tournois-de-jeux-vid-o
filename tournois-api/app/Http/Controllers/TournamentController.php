@@ -2,30 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Tournament\CreateTournamentRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Tournament;
-use Illuminate\Http\JsonResponse;
 
 class TournamentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
-    public function store(CreateTournamentRequest $request): JsonResponse
+    public function store(Request $request)
     {
         $tournament = Tournament::create([
-            ...$request->validated(),
+            'name' => $request->name,
+            'description' => $request->description,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
             'user_id' => auth()->id()
         ]);
 
         return response()->json([
             'status' => 'success',
             'message' => 'Tournament created successfully',
-            'data' => [
-                'tournament' => $tournament
-            ]
+            'data' => $tournament
         ], 201);
     }
 }
