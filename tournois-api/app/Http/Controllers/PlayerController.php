@@ -37,6 +37,24 @@ class PlayerController extends Controller
 
 
     public function getPlayers($tournament_id): JsonResponse
+    {
+        $tournament = Tournament::find($tournament_id);
+        
+        if (!$tournament) {
+            return response()->json([
+                'message' => 'Tournament not found'
+            ], 404);
+        }
+
+        $players = $tournament->players;
+
+        return response()->json([
+            'message' => 'Players retrieved successfully',
+            'data' => $players
+        ]);
+    }
+
+    public function unregister($tournament_id, $player_id): JsonResponse
 {
     $tournament = Tournament::find($tournament_id);
     
@@ -46,11 +64,18 @@ class PlayerController extends Controller
         ], 404);
     }
 
-    $players = $tournament->players;
+    // Check if player is registered
+    if (!$tournament->players()->where('user_id', $player_id)->exists()) {
+        return response()->json([
+            'message' => 'Player not registered in this tournament'
+        ], 404);
+    }
+
+    // Unregister player
+    $tournament->players()->detach($player_id);
 
     return response()->json([
-        'message' => 'Players retrieved successfully',
-        'data' => $players
+        'message' => 'Player unregistered successfully'
     ]);
 }
 }
