@@ -78,5 +78,26 @@ class TournamentController extends Controller
             'data' => $tournament
         ]);
     }
+
+
+
+    public function destroy($id): JsonResponse
+    {
+        $tournament = Tournament::find($id);
+
+        if (!$tournament) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Tournament not found'
+            ], 404);
+        }
+
+        $tournament->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Tournament deleted successfully'
+        ], 200);
+    }
         
 }

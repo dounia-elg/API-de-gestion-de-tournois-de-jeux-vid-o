@@ -23,6 +23,8 @@ Route::group(['middleware' => 'api'], function () {
             Route::get('tournaments/{id}', [TournamentController::class, 'show']);
 
             Route::put('tournaments/{id}', [TournamentController::class, 'update']);
+
+            Route::delete('tournaments/{id}', [TournamentController::class, 'destroy']);
         });
     });
 });
