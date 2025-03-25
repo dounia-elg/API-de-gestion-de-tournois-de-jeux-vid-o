@@ -99,5 +99,7 @@ class TournamentController extends Controller
             'message' => 'Tournament deleted successfully'
         ], 200);
     }
+
+    
         
 }

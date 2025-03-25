@@ -30,6 +30,8 @@ Route::group(['middleware' => 'api'], function () {
 
 
             Route::post('tournaments/{tournament_id}/players', [PlayerController::class, 'register']);
+
+            Route::get('tournaments/{tournament_id}/players', [PlayerController::class, 'getPlayers']);
         });
     });
 });

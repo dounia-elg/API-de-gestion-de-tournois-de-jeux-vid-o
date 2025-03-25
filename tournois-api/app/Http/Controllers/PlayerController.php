@@ -34,4 +34,23 @@ class PlayerController extends Controller
             'data' => $tournament
         ], 201);
     }
+
+
+    public function getPlayers($tournament_id): JsonResponse
+{
+    $tournament = Tournament::find($tournament_id);
+    
+    if (!$tournament) {
+        return response()->json([
+            'message' => 'Tournament not found'
+        ], 404);
+    }
+
+    $players = $tournament->players;
+
+    return response()->json([
+        'message' => 'Players retrieved successfully',
+        'data' => $players
+    ]);
+}
 }
