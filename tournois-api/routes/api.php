@@ -17,6 +17,8 @@ Route::group(['middleware' => 'api'], function () {
             
             // Tournament routes
             Route::post('tournaments', [TournamentController::class, 'store']);
+
+            Route::get('tournaments', [TournamentController::class, 'index']);
         });
     });
 });

@@ -5,9 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tournament;
+use Illuminate\Http\JsonResponse;
 
 class TournamentController extends Controller
-{
+{   
+
+
+    public function index(): JsonResponse
+    {
+        $tournaments = Tournament::all();
+        
+        return response()->json([
+            'status' => 'success',
+            'data' => $tournaments
+        ]);
+    }
+    
     public function store(Request $request)
     {
         $tournament = Tournament::create([
@@ -24,4 +37,6 @@ class TournamentController extends Controller
             'data' => $tournament
         ], 201);
     }
+
+    
 }
