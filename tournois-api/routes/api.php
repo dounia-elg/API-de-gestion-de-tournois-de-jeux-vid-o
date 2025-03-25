@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TournamentController;
+use App\Http\Controllers\PlayerController;
 
 Route::group(['middleware' => 'api'], function () {
     Route::prefix('v1')->group(function () {
@@ -25,6 +26,10 @@ Route::group(['middleware' => 'api'], function () {
             Route::put('tournaments/{id}', [TournamentController::class, 'update']);
 
             Route::delete('tournaments/{id}', [TournamentController::class, 'destroy']);
+
+
+
+            Route::post('tournaments/{tournament_id}/players', [PlayerController::class, 'register']);
         });
     });
 });
