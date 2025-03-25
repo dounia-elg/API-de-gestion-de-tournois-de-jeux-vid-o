@@ -19,6 +19,10 @@ Route::group(['middleware' => 'api'], function () {
             Route::post('tournaments', [TournamentController::class, 'store']);
 
             Route::get('tournaments', [TournamentController::class, 'index']);
+
+            Route::get('tournaments/{id}', [TournamentController::class, 'show']);
+
+            Route::put('tournaments/{id}', [TournamentController::class, 'update']);
         });
     });
 });
