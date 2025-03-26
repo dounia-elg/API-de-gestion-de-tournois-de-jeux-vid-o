@@ -9,6 +9,22 @@ use Illuminate\Http\Request;
 
 class GameMatchController extends Controller
 {
+
+
+    public function index(Request $request): JsonResponse
+    {
+        $matches = GameMatch::with(['tournament', 'players'])
+            ->orderBy('match_date')
+            ->get();
+
+        return response()->json([
+            'message' => 'Matches retrieved successfully',
+            'data' => $matches
+        ]);
+    }
+
+
+
     public function store(Request $request): JsonResponse
     {
         $request->validate([

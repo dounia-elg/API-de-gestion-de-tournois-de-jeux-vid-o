@@ -39,6 +39,8 @@ Route::group(['middleware' => 'api'], function () {
 
 
             Route::post('matches', [GameMatchController::class, 'store']);
+
+            Route::get('matches', [GameMatchController::class, 'index']);
         });
     });
 });
