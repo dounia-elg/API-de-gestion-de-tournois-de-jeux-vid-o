@@ -64,4 +64,22 @@ class GameMatchController extends Controller
             ]
         ], 201);
     }
+
+
+    public function destroy($id): JsonResponse
+    {
+        $match = GameMatch::find($id);
+        
+        if (!$match) {
+            return response()->json([
+                'message' => 'Match not found'
+            ], 404);
+        }
+
+        $match->delete();
+
+        return response()->json([
+            'message' => 'Match deleted successfully'
+        ]);
+    }
 }

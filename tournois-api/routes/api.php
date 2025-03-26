@@ -41,6 +41,10 @@ Route::group(['middleware' => 'api'], function () {
             Route::post('matches', [GameMatchController::class, 'store']);
 
             Route::get('matches', [GameMatchController::class, 'index']);
+
+            Route::delete('matches/{id}', [GameMatchController::class, 'destroy']);
+
+        
         });
     });
 });
