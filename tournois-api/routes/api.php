@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\GameMatchController;
 
 Route::group(['middleware' => 'api'], function () {
     Route::prefix('v1')->group(function () {
@@ -34,6 +35,10 @@ Route::group(['middleware' => 'api'], function () {
             Route::get('tournaments/{tournament_id}/players', [PlayerController::class, 'getPlayers']);
 
             Route::delete('tournaments/{tournament_id}/players/{player_id}', [PlayerController::class, 'unregister']);
+
+
+
+            Route::post('matches', [GameMatchController::class, 'store']);
         });
     });
 });
